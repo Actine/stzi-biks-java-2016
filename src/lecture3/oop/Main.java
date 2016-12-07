@@ -8,6 +8,9 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
+        // Об'єкт, який генерує псевдорандомні значення
+        Random random = new Random();
+
         // Робимо дві змінні під кошачих.
         // Насправді це будуть тигр і кіт, але Java дивиться на ці змінні як на будь-що кошаче,
         // і тому у змінних `a` i `b` викликати можна тільки те, що задане класом Felidae
@@ -29,11 +32,15 @@ public class Main {
         System.out.println(a instanceof Cat);        // false
         System.out.println(a instanceof Felidae);    // true
         System.out.println(a instanceof Object);     // true
+        System.out.println(a instanceof MakesSound); // true
+        System.out.println(a instanceof HasVolume);  // true
 
         System.out.println(b instanceof Tiger);      // false
         System.out.println(b instanceof Cat);        // true
         System.out.println(b instanceof Felidae);    // true
         System.out.println(b instanceof Object);     // true
+        System.out.println(b instanceof MakesSound); // true
+        System.out.println(b instanceof HasVolume);  // true
 
         // Створення змінної із типом-узагальненням часто треба тоді, коли
         // а) наперед невідомо, який підтип буде занесений у цю змінну, або
@@ -41,7 +48,7 @@ public class Main {
 
         // Тут, наприклад, створюємо змінну для будь-чого кошачого, але не знаємо наперед, чи це кіт, чи тигр
         Felidae c;
-        if (new Random().nextBoolean()) {
+        if (random.nextBoolean()) {
             // Якщо випав орел - буде кіт
             c = new Cat(3, 6);
         } else {
@@ -55,8 +62,50 @@ public class Main {
             // Якщо виявиться, що у змінній `c` не кіт, наступний виклик видав би помилку.
             // Тому рекомендується такі виклики писати усередині перевірки `if (x instanceof Type)`
             System.out.println("Cat of " + ((Cat) c).getBreed() + " breed");
+
+            // викликаємо перегрузки метода getSound() із різними наборами параметрів
+            System.out.println("Calm cat says " + ((Cat) c).getSound());
+            System.out.println("Angry cat says " + ((Cat) c).getSound(true));
         } else {
             System.out.println("Not a cat");
+        }
+
+        // Масив усього, що має об'єм. Тут докупи будуть коти, тигри, коробки
+        HasVolume[] items = new HasVolume[31];
+        // 20 котів
+        for (int i = 0; i < 20; i++) {
+            items[i] = new Cat(random.nextInt(36), 2 + random.nextDouble() * 4);
+        }
+        // 10 коробок
+        for (int i = 20; i < 30; i++) {
+            items[i] = new Box(
+                    1 + random.nextInt(60),
+                    1 + random.nextInt(60),
+                    1 + random.nextInt(60)
+            );
+        }
+        // і один тигр
+        items[30] = new Tiger(24, 80, true);
+
+        // Тепер можемо обчислити сумарний об'єм, додавши об'єми усіх цих об'єктів із одного масиву.
+        // Нас при цьому не цікавить, що це - тигр, кіт чи коробка - головне, що воно має об'єм
+        int volume = 0;
+        for (HasVolume item : items) {
+            System.out.println("Volume of " + item + " = " + item.getVolume());
+            volume += item.getVolume();
+        }
+        System.out.println("Total volume: " + volume);
+
+        // Аналогічно можна зробити масив об'єктів, які видають звук і заважають спати
+        // - навіть якщо це об'єкти із абсолютно різних ієрархій типів, їх усіх об'єднує один тип-інтерфейс
+        MakesSound[] nuisances = new MakesSound[]{
+                new Computer(),
+                new Cat(12, 3, "Egyptian"),
+                new Box(10, 10, 10),         // падаюча коробка, яку чіпляє кіт
+                new Tiger(12, 100, false)    // безсмугастий тигр, який гарчить у зоопарку напроти
+        };
+        for (MakesSound nuisance : nuisances) {
+            System.out.println(nuisance.getSound());
         }
     }
 

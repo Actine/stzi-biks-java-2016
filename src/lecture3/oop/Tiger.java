@@ -1,9 +1,11 @@
 package lecture3.oop;
 
 /**
- * Created by Actine on 24.11.2016.
+ * Тигр є підтипом котячих і наслідує всі властивості котячих, включаючи те, що вони видають звук.
+ * Крім цього, у тигра можна вичислити об'єм (інтерфейс реалізований тут, а не у Felidae, просто для демонстрації,
+ * що так можна. Зрештою, може, об'єм є не у всіх котячих?)
  */
-public class Tiger extends Felidae {
+public class Tiger extends Felidae implements HasVolume {
 
     private boolean hasStripes;
 
@@ -28,6 +30,11 @@ public class Tiger extends Felidae {
                 "weight=" + weight + ", " +
                 "hasStripes=" + hasStripes +
                 '}';
+    }
+
+    @Override
+    public int getVolume() {
+        return (int) (100 * 20 * weight * Math.PI);
     }
 
 }

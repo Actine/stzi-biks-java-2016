@@ -1,9 +1,11 @@
 package lecture3.oop;
 
 /**
- * Created by Actine on 24.11.2016.
+ * Абстрактний суперклас «котячі». Об'єднує всі властивості котячих, проте об'єкт самого класу «котячі» створити
+ * не можна - а тільки його конкретних підкласів. Імплементує інтерфейс MakesSound, але абстрактним методом: це означає,
+ * що всі підтипи Felidae теж будуть об'єктами типу MakesSound і реалізуватимуть метод, заданий цим інтерфейсом.
  */
-public abstract class Felidae {
+public abstract class Felidae implements MakesSound {
 
     protected int age;
     protected double weight;

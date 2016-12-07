@@ -1,9 +1,11 @@
 package lecture3.oop;
 
 /**
- * Created by Actine on 24.11.2016.
+ * Кіт є підтипом котячих і наслідує всі властивості котячих, включаючи те, що вони видають звук.
+ * Крім цього, у кота можна вичислити об'єм (інтерфейс реалізований тут, а не у Felidae, просто для демонстрації,
+ * що так можна.  Зрештою, може, об'єм є не у всіх котячих?)
  */
-public class Cat extends Felidae {
+public class Cat extends Felidae implements HasVolume {
 
     private String breed;
 
@@ -26,6 +28,14 @@ public class Cat extends Felidae {
         return "Pur-r-r-r";
     }
 
+    public String getSound(boolean loud) {
+        if (loud) {
+            return "MRRRRREOW";
+        } else {
+            return getSound();
+        }
+    }
+
     @Override
     public String toString() {
         return "Cat{" +
@@ -33,6 +43,11 @@ public class Cat extends Felidae {
                 "weight=" + weight + ", " +
                 "breed='" + breed + '\'' +
                 '}';
+    }
+
+    @Override
+    public int getVolume() {
+        return (int) (30 * 20 * 10 * weight * Math.PI);
     }
 
 }
