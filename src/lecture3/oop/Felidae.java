@@ -7,12 +7,20 @@ package lecture3.oop;
  */
 public abstract class Felidae implements MakesSound {
 
-    protected int age;
-    protected double weight;
+    private int age;
+    private double weight;
 
     public Felidae(int age, double weight) {
         this.age = age;
         this.weight = weight;
+    }
+
+    protected int getAge() {
+        return age;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     public abstract String getSound();

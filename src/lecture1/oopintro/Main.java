@@ -1,5 +1,7 @@
 package lecture1.oopintro;
 
+import lecture3.oop.Cat;
+
 import java.util.Arrays;
 
 class Dekanat {
@@ -74,6 +76,10 @@ public class Main {
 
         System.out.println(s1);
 
+        // Ми можемо тут працювати із об’єктами класу «Кіт», тому що той клас - публічний (хоч він і у іншому пакеті)
+        Cat cat = new Cat(1, 2);
+
+        // Із касою ж - не можемо, оскільки цей клас непублічний і в іншому пакеті
 //        Kassa k = new Kassa();
 //        k.buyDollars(12);
 

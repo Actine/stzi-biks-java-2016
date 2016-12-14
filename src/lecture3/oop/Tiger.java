@@ -26,15 +26,15 @@ public class Tiger extends Felidae implements HasVolume {
     @Override
     public String toString() {
         return "Tiger{" +
-                "age=" + age + ", " +
-                "weight=" + weight + ", " +
+                "age=" + getAge() + ", " +
+                "weight=" + getWeight() + ", " +
                 "hasStripes=" + hasStripes +
                 '}';
     }
 
     @Override
     public int getVolume() {
-        return (int) (100 * 20 * weight * Math.PI);
+        return (int) (100 * 20 * getWeight() * Math.PI);
     }
 
 }

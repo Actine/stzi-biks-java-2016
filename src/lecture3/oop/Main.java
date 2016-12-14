@@ -8,6 +8,7 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
+
         // Об'єкт, який генерує псевдорандомні значення
         Random random = new Random();
 
@@ -22,7 +23,7 @@ public class Main {
         a.eat(2.5);
         System.out.println(a);
 
-        Felidae b = new Cat(30, 6, "Siamese");
+        Felidae b = new Cat(30, 6, Cat.BREED_SIAMESE);
         System.out.println(b);
         System.out.println(b.getSound());
         b.eat(0.5);
@@ -100,13 +101,34 @@ public class Main {
         // - навіть якщо це об'єкти із абсолютно різних ієрархій типів, їх усіх об'єднує один тип-інтерфейс
         MakesSound[] nuisances = new MakesSound[]{
                 new Computer(),
-                new Cat(12, 3, "Egyptian"),
+                new Cat(12, 3, Cat.BREED_EGYPTIAN),
                 new Box(10, 10, 10),         // падаюча коробка, яку чіпляє кіт
                 new Tiger(12, 100, false)    // безсмугастий тигр, який гарчить у зоопарку напроти
         };
         for (MakesSound nuisance : nuisances) {
             System.out.println(nuisance.getSound());
         }
+
+        System.out.println(Cat.isCute);
+        Cat[] cats = new Cat[10];
+        for (int i = 0; i < 10; i++) {
+            cats[i] = Cat.makeRandomCat();
+        }
+        cats[0].isCute = false;
+
+        for (Cat cat : cats) {
+            System.out.println(cat.isCute);
+        }
+
+        System.out.println("Cats are cute? - " + Cat.isCute());
+
+        // Ці два статичні виклики РІВНОЗНАЧНІ і викликаються на класі.
+        // Повернуть не чи конкретно цей кіт милий, а чи саме поняття «кіт» миле.
+        cats[0].isCute();
+        Cat.isCute();
+
+        // А цей виклик - не статичний - поверне вік конкретно цього кота
+        cats[0].getAge();
     }
 
 }
