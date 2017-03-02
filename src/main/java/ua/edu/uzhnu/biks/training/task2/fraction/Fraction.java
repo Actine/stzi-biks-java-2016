@@ -3,7 +3,7 @@ package ua.edu.uzhnu.biks.training.task2.fraction;
 /**
  * Created by Actine on 02.03.2017.
  */
-class Fraction {
+public class Fraction {
 
     private final int numerator;
     private final int denominator;
